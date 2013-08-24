@@ -17,11 +17,12 @@ These scripts are made for Debian distros.
   If we use squidGuard this script downloads and install the Shalla's Blacklists 
 
 ◦ logclr
-  Recursively deletes/clear all log files from the /var/log directory (use it
+  Recursively deletes/clears all log files from the /var/log directory (use it
   with care)
 
 ◦ orphclr
-
+  Looks for orphaned packages, that is packages which are not required by any
+  other package upon your system and purge them
 
 ◦ prgoldkrnl
 

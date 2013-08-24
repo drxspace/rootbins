@@ -7,26 +7,27 @@
 #                                    /_/           drxspace@gmail.com
 #
 
-A list of bash scripts﻿ for use by an administrator of Debian ONLY distros
-for system maintenance
+A list of bash scripts﻿ for use by an administrator for system maintenance.
+These scripts are made for Debian distros.
 
-aptclr
-
-
-blacklists
+◦ aptclr
 
 
-logclr
+◦ blacklists
+  If we use squidGuard this script downloads and install the Shalla's Blacklists 
+
+◦ logclr
+  Recursively deletes/clear all log files from the /var/log directory (use it
+  with care)
+
+◦ orphclr
 
 
-orphclr
+◦ prgoldkrnl
 
 
-prgoldkrnl
+◦ shutup
 
 
-shutup
-
-
-updt
+◦ updt
 

@@ -9,7 +9,7 @@
 #
 
 purgekernels () {
-	apt-get -qq purge $1
+	apt-get autoremove --purge $1
 }
 
 #[[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
@@ -24,6 +24,6 @@ kernelsList=($(dpkg --get-selections linux-* \
 [[ -z ${kernelsList[*]} ]] && { echo "I didn't find other previously installed kernels.
 Bye!"; exit 1; }
 
-echo "Found"
+echo -e "☒\t${kernelsList[*]}" | sed 's/ /\n☒\t/g' | sort
 		
 exit $?

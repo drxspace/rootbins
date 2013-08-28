@@ -9,21 +9,29 @@
 #
 
 purgekernels () {
-	apt-get autoremove --purge $1
+	apt-get autoremove --purge $@
 }
 
-#[[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
+[[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
 
 echo -e "Current working Linux kernel: \033[1m$(uname -r)\033[0m"
 echo -e "\nList of previously installed kernels:"
+echo -e "──────────────────────────────────────────────────────"
 kernelsList=($(dpkg --get-selections linux-* \
 		| grep -v -e $(uname -r | cut -f1,2 -d'-') \
 		| grep -E "linux-(image|headers|source)-[0-9.-]+" \
 		| awk 'BEGIN { alist = ""; sep = " " } { alist = alist $1 sep }; END { print alist }'))
 
-[[ -z ${kernelsList[*]} ]] && { echo "I didn't find other previously installed kernels.
-Bye!"; exit 1; }
+[[ -z ${kernelsList[*]} ]] && { echo -e "\e[0;32mI didn't find other previously installed kernels.\e[0m
+Bye!"; exit 2; }
 
-echo -e "☒\t${kernelsList[*]}" | sed 's/ /\n☒\t/g' | sort
-		
-exit $?
+for item in ${kernelsList[*]}; do
+	echo -e "☒\t\e[1;31m${item}\e[0m" 
+done
+echo
+read -p "Do you want to remove all these items? (yes/no): " Ans
+[[ ${Ans,,} != "yes" ]] && { echo "Okay."; exit 3; }
+
+purgekernels ${kernelsList[*]}
+
+exit 0

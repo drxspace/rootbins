@@ -29,7 +29,7 @@ for item in ${kernelsList[*]}; do
 	echo -e "☒\t\e[1;31m${item}\e[0m" 
 done
 echo
-read -p "Do you want to remove all these items? (yes/no): " Ans
+read -p "Do you want to remove all these items (yes/no)? " Ans
 [[ ${Ans,,} != "yes" ]] && { echo "Okay."; exit 3; }
 
 purgekernels ${kernelsList[*]}

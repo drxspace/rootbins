@@ -6,7 +6,7 @@
 #SHELL=/bin/bash
 #PATH=/root/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 #
-#00 */4  * * *   /root/sbin/cronjobs
+#00 */4  * * *   /root/sbin/ssdtrim
 #
 #
 LOG=/var/log/ssdtrim.log

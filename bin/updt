@@ -18,4 +18,3 @@ echo "Updating repositories. Please wait..."
 { apt-get $option update 2>&1 ; } && apt-get upgrade && apt-get dist-upgrade
 
 exit 0
-

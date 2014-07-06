@@ -12,8 +12,7 @@
 
 { apt-get -q autoremove && apt-get -q autoclean; } || apt-get install -f
 dpkg --configure -a
-rm -v /var/cache/apt/archives/*.deb 2>/dev/null
+rm -fv /var/cache/apt/archives/*.deb 2>/dev/null
 test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk '/^rc/{ print $2}')
 
 exit 0
-

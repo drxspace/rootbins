@@ -1,2 +1,0 @@
-#!/bin/bash
-kbdrate -r 25 -d 660

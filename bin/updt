@@ -27,7 +27,7 @@ option="-q"
 [[ $1 == "-q" ]] && option="-qq"
 
 echo "Updating repositories. Please wait..."
-{ apt-get $option update && apt-get upgrade && apt-get dist-upgrade 2>/tmp/apt-errors.log ; }
+{ apt-get $option update && apt-get upgrade && apt-get dist-upgrade ; } 2>/tmp/apt-errors.log
 
 [[ -s /tmp/apt-errors.log ]] && {
 	echo "[──────────────────────────────────────────────────────"

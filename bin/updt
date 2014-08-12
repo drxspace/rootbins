@@ -21,11 +21,18 @@ if (($EUID != 0)); then
 	exit
 fi
 
-option="-q"
+rm -f /tmp/apt-errors.log
 
+option="-q"
 [[ $1 == "-q" ]] && option="-qq"
 
 echo "Updating repositories. Please wait..."
-{ apt-get $option update 2>&1 ; } && apt-get upgrade && apt-get dist-upgrade
+{ apt-get $option update && apt-get upgrade && apt-get dist-upgrade 2>/tmp/apt-errors.log ; }
 
-exit 0
+[[ -s /tmp/apt-errors.log ]] && {
+	echo "[──────────────────────────────────────────────────────"
+	cat /tmp/apt-errors.log
+	echo "──────────────────────────────────────────────────────]"
+}
+
+exit $?

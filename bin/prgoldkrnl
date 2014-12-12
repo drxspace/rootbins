@@ -34,4 +34,12 @@ read -p "Do you want to remove all these items (yes/no)? " Ans
 
 purgekernels ${kernelsList[*]}
 
+echo
+read -p "Do you want to remove any linux-image leftover directories (yes/no)? " Ans
+[[ ${Ans,,} != "yes" ]] && { echo "Okay, bye!"; exit 4; }
+
+for i in $(ls -CF /lib/modules); do
+	if [ $i != "$(uname -r)/" ]; then rm -rf $i; fi
+done
+
 exit 0

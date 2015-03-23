@@ -15,4 +15,13 @@ dpkg --configure -a
 rm -fv /var/cache/apt/archives/*.deb 2>/dev/null
 test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk '/^rc/{ print $2}')
 
+# Remove all the apt lists to prevent “Hash Sum mismatch” error
+echo -en ":: \033[1mDo you want to remove all the apt lists also? [y/N]: \033[0m"
+read ANS
+[[ ${ANS:-N} == [Yy] ]] && {
+	echo "removing all apt lists..."
+	rm -rfv /var/lib/apt/lists/*
+	mkdir -pv /var/lib/apt/lists/partial
+}
+
 exit 0

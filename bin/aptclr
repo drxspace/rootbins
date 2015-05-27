@@ -15,11 +15,20 @@ dpkg --configure -a
 rm -fv /var/cache/apt/archives/*.deb 2>/dev/null
 test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk '/^rc/{ print $2}')
 
+# Remove all the apt lists backup (.save) files
+echo -en ":: \033[1mDo you want to remove all the apt lists backup (.save) files also? [Y/n]: \033[0m"
+read ANS
+[[ ${ANS:-Y} == [Yy] ]] && {
+	echo "Removing all apt lists backup (.save) files..."
+	rm -fv /etc/apt/*.save
+	rm -fv /etc/apt/sources.list.d/*.save
+}
+
 # Remove all the apt lists to prevent “Hash Sum mismatch” error
 echo -en ":: \033[1mDo you want to remove all the apt lists also? [y/N]: \033[0m"
 read ANS
 [[ ${ANS:-N} == [Yy] ]] && {
-	echo "removing all apt lists..."
+	echo "Removing all apt lists..."
 	rm -rfv /var/lib/apt/lists/*
 	mkdir -pv /var/lib/apt/lists/partial
 }

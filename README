@@ -1,22 +1,22 @@
 #
 # _________        ____  ____________         _______ ___________________
 # ______  /__________  |/ /___  ____/________ ___    |__  ____/___  ____/
-# _  __  / __  ___/__    / ______ \  ___  __ \__  /| |_  /     __  __/   
-# / /_/ /  _  /    _    |   ____/ /  __  /_/ /_  ___ |/ /___   _  /___   
-# \__,_/   /_/     /_/|_|  /_____/   _  .___/ /_/  |_|\____/   /_____/   
+# _  __  / __  ___/__    / ______ \  ___  __ \__  /| |_  /     __  __/
+# / /_/ /  _  /    _    |   ____/ /  __  /_/ /_  ___ |/ /___   _  /___
+# \__,_/   /_/     /_/|_|  /_____/   _  .___/ /_/  |_|\____/   /_____/
 #                                    /_/           drxspace@gmail.com
 #
 
 A list of bash scripts﻿ for use by an administrator for system maintenance.
 These scripts are made for Debian distros.
 
-ver., 1.1
+ver., 1.2
 
 ◦ aptclr
 
 
 ◦ blacklists
-  If we use squidGuard this script downloads and install the Shalla's Blacklists 
+  If we use squidGuard this script downloads and install the Shalla's Blacklists
 
 ◦ logclr
   Recursively deletes/clears all log files from the /var/log directory (use it
@@ -26,11 +26,10 @@ ver., 1.1
   Looks for orphaned packages, that is packages which are not required by any
   other package upon your system and purge them
 
-◦ prgoldkrnl
+◦ prgoldkrnls
 
 
 ◦ shutup
 
 
 ◦ updt
-

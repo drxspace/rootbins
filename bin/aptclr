@@ -2,9 +2,9 @@
 #
 # _________        ____  ____________         _______ ___________________
 # ______  /__________  |/ /___  ____/________ ___    |__  ____/___  ____/
-# _  __  / __  ___/__    / ______ \  ___  __ \__  /| |_  /     __  __/   
-# / /_/ /  _  /    _    |   ____/ /  __  /_/ /_  ___ |/ /___   _  /___   
-# \__,_/   /_/     /_/|_|  /_____/   _  .___/ /_/  |_|\____/   /_____/   
+# _  __  / __  ___/__    / ______ \  ___  __ \__  /| |_  /     __  __/
+# / /_/ /  _  /    _    |   ____/ /  __  /_/ /_  ___ |/ /___   _  /___
+# \__,_/   /_/     /_/|_|  /_____/   _  .___/ /_/  |_|\____/   /_____/
 #                                    /_/           drxspace@gmail.com
 #
 
@@ -16,16 +16,18 @@ rm -fv /var/cache/apt/archives/*.deb 2>/dev/null
 test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk '/^rc/{ print $2}')
 
 # Remove all the apt lists backup (.save) files
-echo -en ":: \033[1mDo you want to remove all the apt lists backup (.save) files also? [Y/n]: \033[0m"
-read ANS
-[[ ${ANS:-Y} == [Yy] ]] && {
-	echo "Removing all apt lists backup (.save) files..."
-	rm -fv /etc/apt/*.save
-	rm -fv /etc/apt/sources.list.d/*.save
-}
+if [[ $(ls -A /etc/apt/*.save 2>/dev/null) ]] || [[ $(ls -A /etc/apt/sources.list.d/*.save 2>/dev/null) ]]; then
+        echo -en ":: \e[1mDo you want to remove all the apt lists backup (.save) files also? [Y/n]: \e[0m"
+        read ANS
+        [[ ${ANS:-Y} == [Yy] ]] && {
+                echo "Removing all apt lists backup (.save) files..."
+                rm -fv /etc/apt/*.save
+                rm -fv /etc/apt/sources.list.d/*.save
+        }
+fi
 
 # Remove all the apt lists to prevent “Hash Sum mismatch” error
-echo -en ":: \033[1mDo you want to remove all the apt lists also? [y/N]: \033[0m"
+echo -en ":: \e[1mDo you want to remove all the apt lists? [y/N]: \e[0m"
 read ANS
 [[ ${ANS:-N} == [Yy] ]] && {
 	echo "Removing all apt lists..."

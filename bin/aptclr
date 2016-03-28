@@ -27,7 +27,7 @@ if [[ $(ls -A /etc/apt/*.save 2>/dev/null) ]] || [[ $(ls -A /etc/apt/sources.lis
 fi
 
 # Remove all the apt lists to prevent “Hash Sum mismatch” error
-echo -en ":: \e[1mDo you want to remove all the apt lists? [y/N]: \e[0m"
+echo -en ":: \e[1mDo you want to remove all the apt lists also? [y/N]: \e[0m"
 read ANS
 [[ ${ANS:-N} == [Yy] ]] && {
 	echo "Removing all apt lists..."

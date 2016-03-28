@@ -15,11 +15,11 @@ command_exists () {
 [[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
 
 if command_exists deborphan ; then
-  deborphan | xargs apt-get -y remove --purge
+  deborphan -n --find-config | xargs apt-get -y remove --purgeautoremove;
 else
-  echo "Utility deborphan is not installed."
-  echo "You can type apt-get install deborphan to install it."
-  exit 2
+  echo "The program ‘deborphan’ is currently not installed. You can install it by typing:";
+  echo "apt-get install deborphan";
+  exit 2;
 fi
 
 exit 0

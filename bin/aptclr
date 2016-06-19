@@ -10,7 +10,7 @@
 
 [[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
 
-{ apt-get -q autoremove && apt-get -q autoclean; } || apt-get install -f
+{ apt -q autoremove && apt -q autoclean; } || apt install -f
 dpkg --configure -a
 rm -fv /var/cache/apt/archives/*.deb 2>/dev/null
 test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk '/^rc/{ print $2}')

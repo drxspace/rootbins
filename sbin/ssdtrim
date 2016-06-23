@@ -14,13 +14,17 @@ LOG=/var/log/ssdtrim.log
 
 trimcmd=$(which fstrim)
 
+echo -en "\n\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait..."
+
 trimbootmsg=$(${trimcmd} -v /boot)
 trimrootmsg=$(${trimcmd} -v /)
+trimrootmsg=$(${trimcmd} -v /home)
 
-trimmsg="${trimbootmsg#*: } from /boot and ${trimrootmsg#*: } from / partition"
+trimmsg="${trimbootmsg#*: } from /boot partition
+${trimrootmsg#*: } from / partition
+${trimrootmsg#*: } from /home partition"
 
 if [[ ${trimmsg} ]]; then
-	echo -en "\n\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait..."
 	echo "$trimmsg on $(date -R) " >> $LOG
 else
 	echo "Something went wrong with the trim function on $(date -R) " >> $LOG

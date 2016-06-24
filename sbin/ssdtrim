@@ -18,11 +18,13 @@ echo -en "\n\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wa
 
 trimbootmsg=$(${trimcmd} -v /boot)
 trimrootmsg=$(${trimcmd} -v /)
-trimrootmsg=$(${trimcmd} -v /home)
+trimhomemsg=$(${trimcmd} -v /home)
+
+echo
 
 trimmsg="${trimbootmsg#*: } from /boot partition
 ${trimrootmsg#*: } from / partition
-${trimrootmsg#*: } from /home partition"
+${trimhomemsg#*: } from /home partition"
 
 if [[ ${trimmsg} ]]; then
 	echo "$trimmsg on $(date -R) " >> $LOG

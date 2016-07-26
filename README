@@ -10,7 +10,7 @@
 A list of bash scripts﻿ for use by an administrator for system maintenance.
 These scripts are made for Debian distros.
 
-version 1.3
+version 1.4
 
 ◦ aptclr
 
@@ -29,7 +29,5 @@ version 1.3
 ◦ prgoldkrnls
 
 
-◦ shutup
-
-
 ◦ updt
+  Update's, upgrade's and dist-upgrade's the system in one commmand

@@ -31,7 +31,8 @@ ${trimzionmsg#*: } from apricity/home partition"
 if [[ ${trimmsg} ]]; then
 	echo "$trimmsg on $(date -R) " | tee -a $LOG
 else
+	echo -en "\e[1;31m"
 	echo "Something went wrong with the trim function on $(date -R) " | tee -a $LOG
 fi
-
+echo -en "\e[0m"
 exit $?

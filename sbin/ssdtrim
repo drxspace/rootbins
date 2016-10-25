@@ -14,7 +14,7 @@ LOG=/var/log/ssdtrim.log
 
 trimcmd=$(which fstrim)
 
-echo -en "\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait..."
+echo -en "\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait...\e[0;97m"
 
 trimbootmsg=$(${trimcmd} -v /boot)
 trimrootmsg=$(${trimcmd} -v /)

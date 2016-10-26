@@ -17,7 +17,7 @@ test "$(dpkg -l | awk '/^rc/{ print $2}')" != "" && dpkg --purge $(dpkg -l | awk
 
 # Remove all the apt lists backup (.save) files
 if [[ $(ls -A /etc/apt/*.save 2>/dev/null) ]] || [[ $(ls -A /etc/apt/sources.list.d/*.save 2>/dev/null) ]]; then
-        echo -en ":: \e[1mDo you want to remove all the apt lists backup (.save) files also? [Y/n]: \e[0m"
+        echo -en ":: \e[1mDo you want to remove all the apt lists backup (.save) files also? [Y/n] \e[0m"
         read ANS
         [[ ${ANS:-Y} == [Yy] ]] && {
                 echo "Removing all apt lists backup (.save) files..."
@@ -27,7 +27,7 @@ if [[ $(ls -A /etc/apt/*.save 2>/dev/null) ]] || [[ $(ls -A /etc/apt/sources.lis
 fi
 
 # Remove all the apt lists to prevent “Hash Sum mismatch” error
-echo -en ":: \e[1mDo you want to remove all the apt lists also? [y/N]: \e[0m"
+echo -en ":: \e[1mDo you want to remove all the apt lists also? [y/N] \e[0m"
 read ANS
 [[ ${ANS:-N} == [Yy] ]] && {
 	echo "Removing all apt lists..."

@@ -19,7 +19,7 @@ echo -en "\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait
 trimbootmsg=$(${trimcmd} -v /boot)
 trimrootmsg=$(${trimcmd} -v /)
 trimhomemsg=$(${trimcmd} -v /home)
-trimzionmsg=$(${trimcmd} -v /media/ZionHome)
+trimzionmsg=$(${trimcmd} -v /run/media/jag/ZionHome)
 
 echo
 

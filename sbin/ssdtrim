@@ -14,6 +14,9 @@ LOG=/var/log/ssdtrim.log
 
 trimcmd=$(which fstrim)
 
+# Turns OFF the cursor
+echo -en "\e[?25l"
+
 echo -en "\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait...\e[0;97m"
 
 trimbootmsg=$(${trimcmd} -v /boot)
@@ -23,16 +26,20 @@ trimzionmsg=$(${trimcmd} -v /run/media/jag/ZionHome)
 
 echo
 
-trimmsg="${trimbootmsg#*: } from /boot partition
-${trimrootmsg#*: } from / partition
-${trimhomemsg#*: } from /home partition
-${trimzionmsg#*: } from apricity/home partition"
+trimmsg="${trimbootmsg#*: } from\t/boot partition
+${trimrootmsg#*: } from\t/ partition
+${trimhomemsg#*: } from\t/home partition
+${trimzionmsg#*: } from\tapricity/home partition"
 
 if [[ ${trimmsg} ]]; then
-	echo "$trimmsg on $(date -R) " | tee -a $LOG
+	echo -e "$trimmsg on $(date -R) " | tee -a $LOG
 else
 	echo -en "\e[1;31m"
 	echo "Something went wrong with the trim function on $(date -R) " | tee -a $LOG
 fi
 echo -en "\e[0m"
+
+# Turns ON the cursor
+echo -en "\e[?25h"
+
 exit $?

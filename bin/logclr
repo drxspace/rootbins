@@ -10,7 +10,7 @@
 
 [[ $EUID -ne 0 ]] && { echo "This script must be run as root" 1>&2; exit 1; }
 
-find /var/log -regex ".*\.\(gz\|old\|1\)" -print0 | xargs -0 rm -v 2>/dev/null
+find /var/log -regex ".*\.\(gz\|old\|1\)" -print0 | xargs -0 rm -fv 2>/dev/null
 find /var/log -type f -print0 | xargs -0 truncate -s0 2>/dev/null
 rm -fv /var/crash/* 2>/dev/null
 rm -fv /var/mail/* 2>/dev/null

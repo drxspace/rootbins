@@ -9,6 +9,7 @@
 #00 */4  * * *   /root/sbin/ssdtrim
 #
 # crontab file is missing newline before EOF, can't install.
+#set -x
 
 LOG=/var/log/ssdtrim.log
 
@@ -17,14 +18,30 @@ trimcmd=$(which fstrim)
 # Turns OFF the cursor
 echo -en "\e[?25l"
 
-echo -en "\e[1;34m::\e[0;34m Disk trimming operation is in progress. Please wait...\e[0;97m"
+#SPIN="/-\|"
+spinny() {
+	local SPIN="/-\|"
+	echo -en "\e[1;34m:: \e[44;34mDisk trimming operation is in progress. Please wait...  \e[101;34m"
+	while true
+	do
+		echo -ne "\b${SPIN:i++%${#SPIN}:1}"
+		sleep 0.25
+	done
+}
+
+# Start it in the background
+spinny &
+
+# Save spinny() PID
+# You need to use the PID to kill the function
+SPINPID=$!
 
 trimbootmsg=$(${trimcmd} -v /boot)
 trimrootmsg=$(${trimcmd} -v /)
 trimhomemsg=$(${trimcmd} -v /home)
 trimzionmsg=$(${trimcmd} -v /run/media/jag/ZionHome)
 
-echo
+echo -e "\e[0;92m\b\b\b\b Done."
 
 trimmsg="${trimbootmsg#*: } from\t/boot partition
 ${trimrootmsg#*: } from\t/ partition
@@ -32,12 +49,16 @@ ${trimhomemsg#*: } from\t/home partition
 ${trimzionmsg#*: } from\tapricity/home partition"
 
 if [[ ${trimmsg} ]]; then
-	echo -e "$trimmsg on $(date -R) " | tee -a $LOG
+	echo -e "${trimmsg}\non $(date -R) " | tee -a $LOG
 else
 	echo -en "\e[1;31m"
 	echo "Something went wrong with the trim function on $(date -R) " | tee -a $LOG
 fi
+
 echo -en "\e[0m"
+
+# Terminate progress
+kill -15 ${SPINPID} >/dev/null 2>&1
 
 # Turns ON the cursor
 echo -en "\e[?25h"

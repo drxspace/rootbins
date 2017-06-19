@@ -41,7 +41,7 @@ trimrootmsg=$(${trimcmd} -v /)
 trimhomemsg=$(${trimcmd} -v /home)
 trimzionmsg=$(${trimcmd} -v /run/media/jag/ZionHome)
 
-echo -e "\e[0;92m\b\b\b\b Done."
+echo -e "\e[0;92m\b\b\b\b Done.\e[0;94m"
 
 trimmsg="${trimbootmsg#*: } from\t/boot partition
 ${trimrootmsg#*: } from\t/ partition
